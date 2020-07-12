@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/EduardoNunes5/WhereDidIStop#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",

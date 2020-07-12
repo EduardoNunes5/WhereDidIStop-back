@@ -1,12 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT;
 const sequelize = require('./services/db');
 
 const userRouter = require('./routes/user');
 
-app.use(express.json());
-app.use('/api/v1/users',userRouter);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use('/v1/api/users',userRouter);
 
 sequelize.sync()
 .then(result=>{

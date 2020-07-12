@@ -14,3 +14,13 @@ exports.getUser = async(req, res, next)=>{
     }
     res.status(204).json(user);
 }
+
+
+exports.postUser = async(req, res, next)=>{
+    console.log(req.body);
+    const name = req.body.name;
+    //to treat later
+    const password = req.body.password;
+    const user = await userRepository.postUser({name, password});
+    res.status(201).json(user);
+}
