@@ -1,5 +1,6 @@
 const userRepository = require('../repository/user');
-const bcrypt = require('bcrypt');
+const auth = require('../services/auth');
+const jwt = require('jsonwebtoken');
 
 
 exports.getUsers = async(req, res, next)=>{
@@ -22,8 +23,7 @@ exports.getUser = async(req, res, next)=>{
 exports.signUp = async(req, res, next)=>{
     try{
         const {name, email, password} = req.body;
-        const hashedPassword = await bcrypt.hash(password,10);
-        console.log(hashedPassword);
+        const hashedPassword = await auth.hashPassword(password,10);
         let user = await userRepository.getByEmail(email);
         if(user){
             return res.status(409).json({msg: 'User with such email address already exists'})
@@ -33,5 +33,24 @@ exports.signUp = async(req, res, next)=>{
     }
     catch(err){
         res.status(500).json({msg: 'Internal error: ' + err});
+    }
+}
+
+exports.login = async (req, res, next)=>{
+    try{
+        const {email, password} = req.body;
+        const user = await userRepository.getByEmail(email);
+        if(!user){
+            return res.status(404).json({msg: "user not found"});
+        }
+        const hashedPassword = user.get().password;
+        if(await auth.checkPassword(password, hashedPassword)){
+            const token = await auth.genToken(user.id);
+            return res.status(200).json({token: token});
+        }
+        res.status(401).json({msg: 'Wrong password!'})
+    }
+    catch(err){
+        res.status(500).json({msg: "erro: " + err})
     }
 }
