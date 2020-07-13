@@ -8,7 +8,7 @@ const userRouter = require('./routes/user');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/v1/api/users',userRouter);
+app.use('/api/v1',userRouter);
 
 sequelize.sync()
 .then(result=>{
