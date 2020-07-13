@@ -2,24 +2,6 @@ const userRepository = require('../repository/user');
 const auth = require('../services/auth');
 const jwt = require('jsonwebtoken');
 
-
-exports.getUsers = async(req, res, next)=>{
-    const users =  await userRepository.getUsers();
-    if(users.length > 0){
-        return res.status(200).json(users);
-    }
-    res.status(204).json(users);
-}
-
-exports.getUser = async(req, res, next)=>{
-    const user = await userRepository.getByEmail(req.params.email);
-    if(user){
-        return res.status(200).json(user);
-    }
-    res.status(204).json(user);
-}
-
-
 exports.signUp = async(req, res, next)=>{
     try{
         const {name, email, password} = req.body;
@@ -53,22 +35,4 @@ exports.login = async (req, res, next)=>{
     catch(err){
         res.status(500).json({msg: "erro: " + err})
     }
-}
-
-exports.isAuthorized = async (req, res, next) =>{
-    const authHeader = req.headers.authorization
-    const token = authHeader && authHeader.split(" ")[1];
-    if(!token){
-        return res.status(401).json({msg: "oops! no token has been provided"});
-    }
-    //either err or the decoded token
-    const canAccess = await auth.verifyToken(token);
-    if(!access)
-        return res.status(401).json({msg: "wrong authentication credentials"})
-    else{
-        req.user = canAccess;
-        next()
-    }
-
-
 }

@@ -4,11 +4,11 @@ const app = express();
 const port = process.env.PORT;
 const sequelize = require('./services/db');
 
-const userRouter = require('./routes/user');
+const authRouter = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/api/v1',userRouter);
+app.use('/api/v1',authRouter);
 
 sequelize.sync()
 .then(result=>{
