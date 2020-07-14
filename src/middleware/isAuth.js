@@ -7,12 +7,14 @@ exports.isAuthorized = async (req, res, next) =>{
         return res.status(401).json({msg: "oops! no token has been provided"});
     }
     //either err or the decoded token
-    const canAccess = await auth.verifyToken(token);
-    if(!access)
-        return res.status(401).json({msg: "wrong authentication credentials"})
-    else{
-        req.user = canAccess;
-        next()
-    }
+     auth.verifyToken(token)
+     .then(userId =>{
+         req.user = userId;
+         next()
+     })
+     .catch(err =>{
+         res.status(401).json(err);
+     })
+
 
 }
