@@ -9,8 +9,8 @@ const contentRouter = require('./routes/content');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/api/v1',authRouter);
-app.use('/api/v1',contentRouter);
+app.use('/api/',authRouter);
+app.use('/api/',contentRouter);
 
 sequelize.sync()
 .then(result=>{
