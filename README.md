@@ -13,7 +13,7 @@ episode (if its a streaming content)
 Which tools have been used to develop this api so far?  
 Javascript  
 Express  
-Bcrypt to hash user password
+Bcrypt to hash user password  
 Postgres as sql sgbd  
 jwt  
 
