@@ -9,6 +9,10 @@ const contentRouter = require('./routes/content');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+})
 app.use('/api/',authRouter);
 app.use('/api/',contentRouter);
 
