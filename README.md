@@ -1,5 +1,5 @@
 # WhereDidIStop
-Still in production.
+Still in development.
 It's basically an api which authenticated user can store and get contents they've been reading/watching.  
 ---
 some of the information stored:  
