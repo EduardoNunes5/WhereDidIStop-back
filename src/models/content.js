@@ -46,5 +46,15 @@ const Content = sequelize.define('Content',{
         }
 )
 
+Content.prototype.toJSON = function(){
+    const obj = Object.assign({}, this.get());
+    if(!obj.page){
+        delete obj.page
+    }
+    else{
+        delete obj.episode;
+    }
+    return obj;
+}
 
 module.exports = Content;
