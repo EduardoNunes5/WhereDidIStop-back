@@ -1,19 +1,39 @@
 # WhereDidIStop
-Still in development.
 It's basically an api which authenticated user can store and get contents they've been reading/watching.  
 ---
-some of the information stored:  
-platform: it could be youtube, netflix, a website, etc.  
-title: what it is called,  
-finished:whether it's finished or not,  
-page (if it's a book)  
-episode (if its a streaming content)
 
----
+## routes:
+POST /api/login  
+> Body: name, email, password  
+ Response -> if success a jwt is returned
+
+POST /api/signup
+> Body: email, password  
+
+GET /api/contents
+> If authenticated, all user contents will be sent
+
+POST /api/contents
+> If authenticated, user will be able to save a content  
+Body:  
+* Platform(String) - where user watches or reads it.
+* Title (String) - what is the content called  (required).
+* Page (String) - which page the user is if its a book.
+* Episode (String) - which episode the user is if its aa video.  
+ ps: either page or episode should be included.
+* Finished (Boolean) - whether that episode or page is finished.  
+
+
+PUT /api/contents/:id
+> If authenticated, user can update one of their contents.
+
+
+
+
+---  
 Which tools have been used to develop this api so far?  
-Javascript  
-Express  
-Bcrypt to hash user password  
-Postgres as sql sgbd  
-jwt  
-
+* Javascript  
+* Express  
+* Bcrypt to hash user password  
+* Postgres as sql sgbd  
+* jwt  
