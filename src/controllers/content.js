@@ -8,7 +8,7 @@ exports.postContent = async (req, res, next)=>{
 
         const content = await contentRepository.postContent({title,platform,page,episode,finished, user_pk});
         if(content){
-            return res.status(201).json({msg: 'content saved successfully'})
+            return res.status(201).json({content})
         }
     }catch(err){
         console.log('errr', err);
@@ -22,4 +22,23 @@ exports.getContents = async (req, res, next)=>{
         return res.status(200).json(contents);
     }
     res.status(204).json(contents);
+}
+
+
+exports.putContent = async (req, res, next) =>{
+    try{
+        const contentId = req.params.id;
+        console.log('Content id:::: ', contentId);
+        const updatedContent = req.body;
+        updatedContent.ownerId = req.user.user;
+        const result = await contentRepository.updateContent(contentId, updatedContent);
+        if(result){
+            return res.status(200).json(result);
+        }
+        res.status(404).json('content not found');
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+
 }
