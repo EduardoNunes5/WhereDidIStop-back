@@ -4,11 +4,16 @@ It's basically an api which authenticated user can store and get contents they'v
 
 ## routes:
 POST /api/login  
-> Body: name, email, password  
- Response -> if success a jwt is returned
+> if success a jwt is returned  
+> Body:
+* name
+* email
+* password  
 
 POST /api/signup
-> Body: email, password  
+> Body:
+* email
+* password  
 
 GET /api/contents
 > If authenticated, all user contents will be sent
