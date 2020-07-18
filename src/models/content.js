@@ -9,7 +9,7 @@ const Content = sequelize.define('Content',{
         },
         title:{
             type:Sequelize.STRING,
-            notNull: true
+            allowNull: false
         },
         platform:{
             type:Sequelize.STRING,
