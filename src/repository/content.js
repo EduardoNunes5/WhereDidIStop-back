@@ -20,3 +20,12 @@ exports.updateContent = async(contentId, payload) => {
         return content;
     }
 }
+
+exports.deleteById = async (contentId, userId) =>{
+    const content = await this.getById(contentId);
+    if (content){
+        content.destroy({where: {user_pk: userId}})
+        .then(result => content);
+    }
+    return content;
+}

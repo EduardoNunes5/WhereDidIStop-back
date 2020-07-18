@@ -42,3 +42,19 @@ exports.putContent = async (req, res, next) =>{
     }
 
 }
+
+exports.deleteById = async (req, res, next) =>{
+    try{
+        const contentId = req.params.id;
+        const userId = req.user.user;
+        const deletedContent = await contentRepository.deleteById(contentId, userId);
+        if(deletedContent){
+            res.status(200).json(deletedContent);
+        }
+        else{
+            res.status(404).json('Content not found');
+        }
+    }catch(err){
+        res.status(500).json(err);
+    }
+}
