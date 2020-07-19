@@ -5,7 +5,7 @@
 ## How to run
 1. Execute npm install to install all the packages
 
-2. Configuring env variables. Create a file named .env, then set these variables according to your database.
+2. Configuring env variables. Create a file named .env, then set these variables according to your database if you're going to run it locally.
     * PORT
     * DB_NAME
     * DB_USERNAME
@@ -14,7 +14,7 @@
     * DB_DIALECT
     * ACCESS_TOKEN_SECRET  
 
-3. You can run either npm run runDev (using nodemon) or npm start
+3. Run npm run runDev also if running locally. Otherwise just run npm start.
 
 
 
