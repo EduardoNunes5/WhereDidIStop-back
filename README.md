@@ -1,10 +1,10 @@
 # WhereDidIStop
-It's basically an api which authenticated user can store and get contents they've been reading/watching.  
+
 ---
 
 ## routes:
 POST /api/login  
-> if success a jwt is returned  
+> if succeded a jwt is returned  
 > Body:
 * name
 * email
@@ -30,10 +30,11 @@ Body:
 
 
 PUT /api/contents/:id
-> If authenticated, user can update one of their contents.
+> If authenticated, users can update one of their contents.
 
 
-
+DELETE /api/contents/:id
+> If authenticated, users can delete one of their contents
 
 ---  
 Which tools have been used to develop this api so far?  
