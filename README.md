@@ -2,6 +2,22 @@
 
 ---
 
+## How to run
+1. Execute npm install to install all the packages
+
+2. Configuring env variables. Create a file named .env, then set these variables according to your database.
+    * PORT
+    * DB_NAME
+    * DB_USERNAME
+    * DB_PASSWORD
+    * DB_HOST
+    * DB_DIALECT
+    * ACCESS_TOKEN_SECRET  
+
+3. You can run either npm run runDev (using nodemon) or npm start
+
+
+
 ## routes:
 POST /api/login  
 > if succeded a jwt is returned  
@@ -35,6 +51,11 @@ PUT /api/contents/:id
 
 DELETE /api/contents/:id
 > If authenticated, users can delete one of their contents
+
+
+DELETE /api/contents/
+> If authenticated, users can delete all of their contents
+
 
 ---  
 Which tools have been used to develop this api so far?  
