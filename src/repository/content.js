@@ -6,12 +6,12 @@ exports.getUserContents = async(userId) => await Content.findAll({where:{user_pk
 
 exports.getById = async(contentId) => await Content.findOne({where:{id: contentId}});
 
-exports.updateContent = async(contentId, payload) => {
+exports.updateContent = async(contentId, payload, userId) => {
     const content = await this.getById(contentId);
     if(content){
         return content.update(payload,{
             where:{
-                user_pk: payload.ownerId,
+                user_pk: userId,
                 id: contentId
                 }
             })

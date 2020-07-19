@@ -34,10 +34,6 @@ const Content = sequelize.define('Content',{
         {
             validate:{
                 pageOrEpisode: function(){
-                    console.log((this.page === null && this.episode !== null));
-                    console.log((this.page !== null && this.episode === null));
-                    console.log(this.page);
-                    console.log(this.episode);
                     if(!((!this.page && this.episode) || (this.page && !this.episode))){
                         throw new Error('require either episode or page');
                     }

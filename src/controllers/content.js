@@ -29,8 +29,7 @@ exports.putContent = async (req, res, next) =>{
     try{
         const contentId = req.params.id;
         const updatedContent = req.body;
-        updatedContent.ownerId = req.user.userId;
-        const result = await contentRepository.updateContent(contentId, updatedContent);
+        const result = await contentRepository.updateContent(contentId, updatedContent, req.user.userId);
         if(result){
             return res.status(200).json(result);
         }
@@ -59,7 +58,7 @@ exports.deleteById = async (req, res, next) =>{
 exports.deleteAll = async (req, res, next) =>{
     try{
         const deletedContents = await contentRepository.deleteAll(req.user.userId);
-        res.status(204).json({msg: `${deletedContents[0]} content(s) deleted`});
+        res.status(200).json({msg: `${deletedContents[0]} content(s) deleted`});
     }catch(err){
         res.status(500).json(err);
     }
