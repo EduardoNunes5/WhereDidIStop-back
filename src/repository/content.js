@@ -29,3 +29,6 @@ exports.deleteById = async (contentId, userId) =>{
     }
     return content;
 }
+
+
+exports.deleteAll = async (userId)=> await Content.destroy({where:{user_pk: userId}});

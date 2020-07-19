@@ -4,7 +4,7 @@ const contentRepository = require('../repository/content.js');
 exports.postContent = async (req, res, next)=>{
     try{
         const {title, platform, page, episode, finished} = req.body;
-        const user_pk = req.user.user;
+        const user_pk = req.user.userId;
 
         const content = await contentRepository.postContent({title,platform,page,episode,finished, user_pk});
         if(content){
@@ -17,7 +17,7 @@ exports.postContent = async (req, res, next)=>{
 }
 
 exports.getContents = async (req, res, next)=>{
-    const contents = await contentRepository.getUserContents(req.user.user);
+    const contents = await contentRepository.getUserContents(req.user.userId);
     if(contents[0]){
         return res.status(200).json(contents);
     }
@@ -28,16 +28,14 @@ exports.getContents = async (req, res, next)=>{
 exports.putContent = async (req, res, next) =>{
     try{
         const contentId = req.params.id;
-        console.log('Content id:::: ', contentId);
         const updatedContent = req.body;
-        updatedContent.ownerId = req.user.user;
+        updatedContent.ownerId = req.user.userId;
         const result = await contentRepository.updateContent(contentId, updatedContent);
         if(result){
             return res.status(200).json(result);
         }
         res.status(404).json('content not found');
     }catch(err){
-        console.log(err);
         res.status(500).json(err);
     }
 
@@ -46,14 +44,22 @@ exports.putContent = async (req, res, next) =>{
 exports.deleteById = async (req, res, next) =>{
     try{
         const contentId = req.params.id;
-        const userId = req.user.user;
-        const deletedContent = await contentRepository.deleteById(contentId, userId);
+        const deletedContent = await contentRepository.deleteById(contentId, req.user.userId);
         if(deletedContent){
             res.status(200).json(deletedContent);
         }
         else{
             res.status(404).json('Content not found');
         }
+    }catch(err){
+        res.status(500).json(err);
+    }
+}
+
+exports.deleteAll = async (req, res, next) =>{
+    try{
+        const deletedContents = await contentRepository.deleteAll(req.user.userId);
+        res.status(204).json({msg: `${deletedContents[0]} content(s) deleted`});
     }catch(err){
         res.status(500).json(err);
     }

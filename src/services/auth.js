@@ -9,9 +9,9 @@ exports.checkPassword = async(plainPassword, hashedPassword)=>{
 }
 
 exports.genToken = async (userId)=>{
-    return await jwt.sign({user: userId}, process.env.ACCESS_TOKEN_SECRET);
+    return await jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET);
 }
 
 exports.verifyToken = async(token)=>{
-    return await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) 
+    return await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
 }
