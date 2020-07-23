@@ -18,7 +18,7 @@ app.use((req,res,next)=>{
 app.use('/api/',authRouter);
 app.use('/api/',contentRouter);
 
-sequelize.sync()
+sequelize.sync({force:true})
 .then(result=>{
     app.listen(port, ()=>{
         console.log('listening on port ', port);
