@@ -14,10 +14,7 @@ const Content = sequelize.define('Content',{
         platform:{
             type:Sequelize.STRING,
         },
-        page:{
-            type:Sequelize.STRING(5)
-        },
-        episode:{
+        stopped_point:{
             type:Sequelize.STRING(5)
         },
         finished:{
@@ -30,16 +27,8 @@ const Content = sequelize.define('Content',{
                 model:'Users', key: 'id'
             },
             ondelete:'CASCADE'
-        }},
-        {
-            validate:{
-                pageOrEpisode: function(){
-                    if(!((!this.page && this.episode) || (this.page && !this.episode))){
-                        throw new Error('require either episode or page');
-                    }
-                }
-            }
-        }
+        }}
+
 )
 
 Content.prototype.toJSON = function(){
