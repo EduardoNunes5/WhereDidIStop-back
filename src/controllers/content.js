@@ -3,10 +3,9 @@ const contentRepository = require('../repository/content.js');
 
 exports.postContent = async (req, res, next)=>{
     try{
-        const {title, platform, page, episode, finished} = req.body;
         const user_pk = req.user.userId;
 
-        const content = await contentRepository.postContent({title,platform,page,episode,finished, user_pk});
+        const content = await contentRepository.postContent(req.body, user_pk});
         if(content){
             return res.status(201).json({content})
         }
