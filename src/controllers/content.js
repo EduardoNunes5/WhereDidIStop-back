@@ -6,7 +6,7 @@ exports.postContent = async (req, res, next)=>{
         const user_pk = req.user.userId;
         const {platform, title, finished, stoppedPoint: stopped_point} = req.body;
 
-        const content = await contentRepository.postContent({platform, titile, finished, stopped_point, user_pk});
+        const content = await contentRepository.postContent({platform, title, finished, stopped_point, user_pk});
         if(content){
             return res.status(201).json({content})
         }
